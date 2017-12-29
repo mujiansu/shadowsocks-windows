@@ -69,7 +69,7 @@ namespace Shadowsocks.Controller
             {
                 string request = Encoding.UTF8.GetString(firstPacket, 0, length);
                 string[] lines = request.Split('\r', '\n');
-                bool hostMatch = false, pathMatch = false, useSocks = false;
+                bool hostMatch = false, pathMatch = false, useSocks = true;
                 bool secretMatch = PacSecret.IsNullOrEmpty();
                 foreach (string line in lines)
                 {
