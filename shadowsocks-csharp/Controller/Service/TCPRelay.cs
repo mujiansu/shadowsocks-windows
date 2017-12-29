@@ -612,7 +612,7 @@ namespace Shadowsocks.Controller
 
                 ProxyTimer proxyTimer = new ProxyTimer(_proxyTimeout) { AutoReset = false };
                 proxyTimer.Elapsed += ProxyConnectTimer_Elapsed;
-                proxyTimer.Enabled = true;
+                proxyTimer.Enabled = false;
 
                 proxyTimer.Session = session;
                 proxyTimer.DestEndPoint = serverEP;
@@ -672,7 +672,7 @@ namespace Shadowsocks.Controller
                 remote.EndConnectProxy(ar);
 
                 _proxyConnected = true;
-
+                
                 if (_config.isVerboseLogging)
                 {
                     if (!(remote is DirectConnect))
@@ -684,7 +684,7 @@ namespace Shadowsocks.Controller
                 _startConnectTime = DateTime.Now;
                 ServerTimer connectTimer = new ServerTimer(_serverTimeout) { AutoReset = false };
                 connectTimer.Elapsed += DestConnectTimer_Elapsed;
-                connectTimer.Enabled = true;
+                connectTimer.Enabled = false;
                 connectTimer.Session = session;
                 connectTimer.Server = server;
 

@@ -16,7 +16,7 @@ namespace Shadowsocks.Controller
 
         public override bool Handle(byte[] firstPacket, int length, Socket socket, object state)
         {
-            if (socket.ProtocolType != ProtocolType.Tcp)
+            if (socket.ProtocolType != ProtocolType.Tcp || firstPacket[0] ==5)
             {
                 return false;
             }
@@ -43,7 +43,7 @@ namespace Shadowsocks.Controller
             private readonly object _Lock = new object();
 
             public void Start(byte[] firstPacket, int length, Socket socket, int targetPort)
-            {
+            {  
                 _firstPacket = firstPacket;
                 _firstPacketLength = length;
                 _local = socket;

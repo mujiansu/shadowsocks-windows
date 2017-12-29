@@ -82,7 +82,7 @@ namespace Shadowsocks.Controller
         public void UpdatePACFromGFWList(Configuration config)
         {
             WebClient http = new WebClient();
-            http.Proxy = new WebProxy(IPAddress.Loopback.ToString(), config.localPort);
+            //http.Proxy = new WebProxy(IPAddress.Loopback.ToString(), config.localPort);
             http.DownloadStringCompleted += http_DownloadStringCompleted;
             http.DownloadStringAsync(new Uri(GFWLIST_URL));
         }

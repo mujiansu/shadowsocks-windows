@@ -26,7 +26,7 @@ namespace Shadowsocks.Controller
 
         public override bool Handle(byte[] firstPacket, int length, Socket socket, object state)
         {
-            if (socket.ProtocolType != ProtocolType.Udp)
+            if (socket.ProtocolType != ProtocolType.Udp || firstPacket[0] != 5)
             {
                 return false;
             }

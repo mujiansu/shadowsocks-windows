@@ -540,10 +540,20 @@ namespace Shadowsocks.Controller
                 TCPRelay tcpRelay = new TCPRelay(this, _config);
                 UDPRelay udpRelay = new UDPRelay(this);
                 List<Listener.IService> services = new List<Listener.IService>();
-                services.Add(tcpRelay);
-                services.Add(udpRelay);
-                services.Add(_pacServer);
-                services.Add(new PortForwarder(privoxyRunner.RunningPort));
+                if (!_config.global)
+                {
+                  services.Add(_pacServer);
+                  services.Add(tcpRelay);
+                  services.Add(udpRelay);
+                }     
+                else
+                {
+                    services.Add(new PortForwarder(privoxyRunner.RunningPort));
+                    services.Add(tcpRelay);
+                    services.Add(udpRelay);
+                }       
+               
+                
                 _listener = new Listener(services);
                 _listener.Start(_config);
             }
